@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <conio.h>
 using namespace std;
 
 const int SIZE = 4;
@@ -6,7 +7,7 @@ const int SIZE = 4;
 int board[SIZE][SIZE];
 
 void init() {
-    srand(time(nullptr)); // Khởi tạo bộ sinh số ngẫu nhiên với giá trị seed là thời gian hiện tại
+    srand(time(NULL)); // Khởi tạo bộ sinh số ngẫu nhiên với giá trị seed là thời gian hiện tại
     for(int i=0; i<SIZE; i++) { // Lặp qua các hàng của bảng
         for(int j=0; j<SIZE; j++) { // Lặp qua các cột của bảng
             board[i][j] = 0;  //Đặt giá trị ban đầu của mỗi ô trong bảng là 0
@@ -107,36 +108,42 @@ bool isGameOver() {
     return true;
 }
 
-int main() {
-init();
-printBoard();
-while(!isGameOver()) {
-    cout << "Enter move (u/d/l/r): ";
-    char move;
-    cin >> move;
-    switch(move) {
-        case 'u':
-            moveUp();
-            break;
-        case 'd':
-            moveDown();
-            break;
-        case 'l':
-            moveLeft();
-            break;
-        case 'r':
-            moveRight();
-            break;
-        }
-        int x = rand() % SIZE;
-        int y = rand() % SIZE;
-        while(board[x][y] != 0) {
-            x = rand() % SIZE;
-            y = rand() % SIZE;
-        }
-        board[x][y] = 2;
-    printBoard();
-}
-cout << "Game over!" << endl;
-return 0;
+int main(){
+	init();
+	printBoard();	
+	while(!isGameOver()){
+		cout << "Enter move A/D: left/right, W/S: up/down! ";
+	    char move = getch();	    
+	    switch(move){
+	        case 'W':
+	        case 'w':
+	            moveUp();
+	            break;
+	        case 'S':
+	        case 's':
+	            moveDown();
+	            break;
+	        case 'A':
+	        case 'a':
+	            moveLeft();
+	            break;
+	        case 'D':
+	        case 'd':
+	            moveRight();
+	            break;
+	        default:
+	        	break;
+	    }
+	    int x = rand() % SIZE;
+	    int y = rand() % SIZE;
+	    while(board[x][y] != 0) {
+	        x = rand() % SIZE;
+	        y = rand() % SIZE;
+	    }
+	    board[x][y] = 2;
+	    system("cls");
+	    printBoard();
+	}	
+	cout << "Game over!" << endl;
+	return 0;
 }
